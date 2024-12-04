@@ -83,4 +83,4 @@ In this example, an `X-MAS` appears **_`9`_** times.
 
 Flip the word search from the instructions back over to the word search side and try again. **How many times does an X-MAS appear?**
 
-Your puzzle answer was 2005.
+Your puzzle answer was `2005`.

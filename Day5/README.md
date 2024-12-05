@@ -71,9 +71,11 @@ The last update, `97,13,75,29,47`, is **not** in the correct order due to breaki
 
 For some reason, the Elves also need to know the **middle page number** of each update being printed. Because you are currently only printing the correctly-ordered updates, you will need to find the middle page number of each correctly-ordered update. In the above example, the correctly-ordered updates are:
 
-> 75,47,**61**,53,29
-> 97,61,**53**,29,13
-> 75,**29**,13
+```txt
+75,47,61,53,29
+97,61,53,29,13
+75,29,13
+```
 
 These have middle page numbers of `61`, `53`, and `29` respectively. Adding these page numbers together gives **_`143`_**.
 

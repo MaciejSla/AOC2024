@@ -1,5 +1,10 @@
 # [--- Day 4: Ceres Search ---](https://adventofcode.com/2024/day/4)
 
+<!-- no toc -->
+
+- [Star 1](#star-1)
+- [Star 2](#star-2)
+
 ## Star 1
 
 "Looks like the Chief's not here. Next!" One of The Historians pulls out a device and pushes the only button on it. After a brief flash, you recognize the interior of the [Ceres monitoring station](https://adventofcode.com/2019/day/10)!

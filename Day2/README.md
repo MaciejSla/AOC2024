@@ -1,5 +1,10 @@
 # [--- Day 2: Red-Nosed Reports ---](https://adventofcode.com/2024/day/2)
 
+<!-- no toc -->
+
+- [Star 1](#star-1)
+- [Star 2](#star-2)
+
 ## Star 1
 
 Fortunately, the first location The Historians want to search isn't a long walk from the Chief Historian's office.

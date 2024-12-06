@@ -1,9 +1,7 @@
 # [--- Day 5: Print Queue ---](https://adventofcode.com/2024/day/5)
 
-<!-- no toc -->
-
-- [Star 1](#star-1)
-- [Star 2](#star-2)
+[Star 1](#star-1)
+[Star 2](#star-2)
 
 ## Star 1
 

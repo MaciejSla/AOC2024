@@ -13,10 +13,13 @@ type Coords[T, U any] struct {
 }
 
 type Guard struct {
-	direction string
-	position  Coords[int, int]
-	visited   map[Coords[int, int]]bool
-	leftMap   bool
+	direction         string
+	startingDirection string
+	startingPosition  Coords[int, int]
+	position          Coords[int, int]
+	visited           map[Coords[int, int]]bool
+	paradoxPath       []Coords[Coords[int, int], string]
+	leftMap           bool
 }
 
 func coordInBounds(coords Coords[int, int], bounds Coords[int, int]) bool {
@@ -46,13 +49,15 @@ func main() {
 		os.Exit(1)
 	}
 	pathMap := [][]string{}
-	guard := Guard{"", Coords[int, int]{}, make(map[Coords[int, int]]bool), false}
+	guard := Guard{"", "", Coords[int, int]{}, Coords[int, int]{}, make(map[Coords[int, int]]bool), []Coords[Coords[int, int], string]{}, false}
 	for y, line := range strings.Split(string(data), "\r\n") {
 		cells := strings.Split(line, "")
 		if guard.direction == "" {
 			for x, cell := range cells {
 				if slices.Contains(directions, cell) {
 					guard.direction = cell
+					guard.startingDirection = cell
+					guard.startingPosition = Coords[int, int]{x, y}
 					guard.position = Coords[int, int]{x, y}
 					guard.visited[guard.position] = true
 					cells[x] = "."
@@ -64,14 +69,8 @@ func main() {
 	}
 	mapBounds := Coords[int, int]{len(pathMap[0]) - 1, len(pathMap) - 1}
 
-	// Debugging commented out
-	// index := 0
 	for {
-		// if index == 10 {
-		// 	break
-		// }
 		move := guard.position
-		// fmt.Printf("Round %d - Before move: %v\n", index, move)
 		switch guard.direction {
 		case "^":
 			move.Y -= 1
@@ -82,7 +81,6 @@ func main() {
 		case "v":
 			move.Y += 1
 		}
-		// fmt.Printf("Round %d - After move: %v\n", index, move)
 		if coordInBounds(move, mapBounds) {
 			switch pathMap[move.Y][move.X] {
 			case "#":
@@ -95,7 +93,59 @@ func main() {
 			guard.leftMap = true
 			break
 		}
-		// index++
 	}
 	fmt.Println("Star1 count: ", len(guard.visited))
+
+	paradoxCount := 0
+	guard.visited[guard.startingPosition] = false
+
+	// This is probably slow but oh well
+	for position, valid := range guard.visited {
+		if valid {
+			guard.paradoxPath = []Coords[Coords[int, int], string]{}
+			guard.position = guard.startingPosition
+			guard.direction = guard.startingDirection
+
+			// damn you shallow copies!!!!!!
+			tempMap := make([][]string, len(pathMap))
+			for i := range pathMap {
+				tempMap[i] = make([]string, len(pathMap[i]))
+				copy(tempMap[i], pathMap[i])
+			}
+
+			// About 1h spent on tempMap[position.Y][position.Y]... kill me
+			tempMap[position.Y][position.X] = "#"
+
+			for {
+				move := guard.position
+				switch guard.direction {
+				case "^":
+					move.Y -= 1
+				case ">":
+					move.X += 1
+				case "<":
+					move.X -= 1
+				case "v":
+					move.Y += 1
+				}
+				if coordInBounds(move, mapBounds) {
+					coords := Coords[Coords[int, int], string]{move, guard.direction}
+					if slices.Contains(guard.paradoxPath, coords) {
+						paradoxCount++
+						break
+					}
+					switch tempMap[move.Y][move.X] {
+					case "#":
+						guard.direction = turnRight(guard.direction)
+					case ".":
+						guard.paradoxPath = append(guard.paradoxPath, Coords[Coords[int, int], string]{move, guard.direction})
+						guard.position = move
+					}
+				} else {
+					break
+				}
+			}
+		}
+	}
+	fmt.Println("Star2 count: ", paradoxCount)
 }

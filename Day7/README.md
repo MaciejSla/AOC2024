@@ -1,6 +1,7 @@
 # [--- Day 7: Bridge Repair ---](https://adventofcode.com/2024/day/7)
 
 [Star 1](#star-1)
+[Star 2](#star-2)
 
 ## Star 1
 
@@ -39,3 +40,23 @@ The engineers just need the **total calibration result**, which is the sum of th
 Determine which equations could possibly be true. **What is their total calibration result?**
 
 Your puzzle answer was `2437272016585`.
+
+## Star 2
+
+The engineers seem concerned; the total calibration result you gave them is nowhere close to being within safety tolerances. Just then, you spot your mistake: some well-hidden elephants are holding a **third type of operator**.
+
+The [concatenation](https://en.wikipedia.org/wiki/Concatenation) operator (`||`) combines the digits from its left and right inputs into a single number. For example, `12 || 345` would become `12345`. All operators are still evaluated left-to-right.
+
+Now, apart from the three equations that could be made true using only addition and multiplication, the above example has three more equations that can be made true by inserting operators:
+
+_The examples below are taken directly from [adventofcode.com](https://adventofcode.com/2024/day/7). They are wrong, and as of 08.12.2024 are still present on the site._
+
+- `156: 15 6` can be made true through a single concatenation: `15 || 6 = 156`. _<-- this one is correct_
+- `7290: 6 8 6 15` can be made true using `6 * 8 || 6 * 15`. _<-- this violates the "evaluated left-to-right" rule_
+- `192: 17 8 14` can be made true using `17 || 8 + 14`. _<-- this doesn't even produce 192..._
+
+Adding up all six test values (the three that could be made before using only `+` and `*` plus the new three that can now be made by also using `||`) produces the new **total calibration result** of **`11387`**.
+
+Using your new knowledge of elephant hiding spots, determine which equations could possibly be true. **What is their total calibration result?**
+
+Your puzzle answer was `162987117690649`.

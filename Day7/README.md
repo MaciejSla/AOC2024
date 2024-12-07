@@ -49,7 +49,7 @@ The [concatenation](https://en.wikipedia.org/wiki/Concatenation) operator (`||`)
 
 Now, apart from the three equations that could be made true using only addition and multiplication, the above example has three more equations that can be made true by inserting operators:
 
-_The examples below are taken directly from [adventofcode.com](https://adventofcode.com/2024/day/7). They are wrong, and as of 08.12.2024 are still present on the site._
+_The examples below are copied directly from [adventofcode.com](https://adventofcode.com/2024/day/7). They are wrong, and as of 08.12.2024 are still present on the site._
 
 - `156: 15 6` can be made true through a single concatenation: `15 || 6 = 156`. _<-- this one is correct_
 - `7290: 6 8 6 15` can be made true using `6 * 8 || 6 * 15`. _<-- this violates the "evaluated left-to-right" rule_

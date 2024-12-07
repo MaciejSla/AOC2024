@@ -6,3 +6,4 @@
 - [Day 4: Ceres Search](https://github.com/MaciejSla/AOC2024/tree/main/Day4) - [adventofcode.com ☍](https://adventofcode.com/2024/day/4)
 - [Day 5: Print Queue](https://github.com/MaciejSla/AOC2024/tree/main/Day5) - [adventofcode.com ☍](https://adventofcode.com/2024/day/5)
 - [Day 6: Guard Gallivant](https://github.com/MaciejSla/AOC2024/tree/main/Day6) - [adventofcode.com ☍](https://adventofcode.com/2024/day/6)
+- [Day 7: Bridge Repair](https://github.com/MaciejSla/AOC2024/tree/main/Day7) - [adventofcode.com ☍](https://adventofcode.com/2024/day/7)

@@ -2,10 +2,10 @@ package main
 
 import (
 	"fmt"
-	"os"
 	"slices"
 	"strconv"
 	"strings"
+	"utils"
 )
 
 type Rule struct {
@@ -34,11 +34,7 @@ func orderUpdate(updateArr []string, rulebook map[string]Rule) []string {
 }
 
 func main() {
-	input, err := os.ReadFile("data.txt")
-	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
-	}
+	input := utils.ReadFile("data.txt")
 	data := strings.Split(string(input), "\n\r")
 	rules, updates := strings.Split(strings.TrimSpace(data[0]), "\n"), strings.Split(strings.TrimSpace(data[1]), "\n")
 
@@ -65,7 +61,7 @@ func main() {
 		}
 		rulebook[after] = afterRule
 	}
-	
+
 	count1 := 0
 	count2 := 0
 	incorrectUpdates := []string{}
@@ -75,7 +71,7 @@ func main() {
 		valid := true
 		pages := strings.Split(strings.TrimSpace(update), ",")
 
-		outer:
+	outer:
 		for i, page := range pages {
 			pageRule := rulebook[page]
 			for x := i; x >= 0; x-- {
@@ -89,10 +85,7 @@ func main() {
 		if valid {
 			middleIndex := len(pages) / 2
 			middlePage, err := strconv.Atoi(pages[middleIndex])
-			if err != nil {
-				fmt.Println(err)
-				os.Exit(1)
-			}
+			utils.ThrowErr(err)
 			count1 += middlePage
 		}
 	}
@@ -103,10 +96,7 @@ func main() {
 		orderedArr := orderUpdate(pages, rulebook)
 		middleIndex := len(pages) / 2
 		middlePage, err := strconv.Atoi(orderedArr[middleIndex])
-		if err != nil {
-			fmt.Println(err)
-			os.Exit(1)
-		}
+		utils.ThrowErr(err)
 		count2 += middlePage
 	}
 

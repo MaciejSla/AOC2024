@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
-	"os"
 	"slices"
 	"strings"
+	"utils"
 )
 
 type Coords[T, U any] struct {
@@ -43,11 +43,7 @@ func turnRight(direction string) string {
 
 func main() {
 	directions := []string{"^", ">", "<", "v"}
-	data, err := os.ReadFile("data.txt")
-	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
-	}
+	data := utils.ReadFile("data.txt")
 	pathMap := [][]string{}
 	guard := Guard{"", "", Coords[int, int]{}, Coords[int, int]{}, make(map[Coords[int, int]]bool), []Coords[Coords[int, int], string]{}, false}
 	for y, line := range strings.Split(string(data), "\r\n") {

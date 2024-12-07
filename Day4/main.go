@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
-	"os"
 	"reflect"
 	"strings"
+	"utils"
 )
 
 func isInBounds(x int, y int, data [][]string) bool {
@@ -20,20 +20,20 @@ func appendToWord(x int, y int, data [][]string) string {
 }
 
 type DirectionsXMAS struct {
-	right,left,up,down,rightUp,rightDown,leftUp,leftDown string
+	right, left, up, down, rightUp, rightDown, leftUp, leftDown string
 }
 
 // Slow ass solution bruh
 func findXMAS(x int, y int, data [][]string) int {
 	directions := DirectionsXMAS{
-		right: "X",
-		left: "X",
-		up: "X",
-		down: "X",
-		rightUp: "X",
+		right:     "X",
+		left:      "X",
+		up:        "X",
+		down:      "X",
+		rightUp:   "X",
 		rightDown: "X",
-		leftUp: "X",
-		leftDown: "X",
+		leftUp:    "X",
+		leftDown:  "X",
 	}
 
 	for i := 1; i < 4; i++ {
@@ -56,11 +56,11 @@ func findXMAS(x int, y int, data [][]string) int {
 	}
 	count := 0
 	v := reflect.ValueOf(directions)
-    for i := 0; i < v.NumField(); i++ {
-        if v.Field(i).String() == "XMAS" {
+	for i := 0; i < v.NumField(); i++ {
+		if v.Field(i).String() == "XMAS" {
 			count++
 		}
-    }
+	}
 	return count
 }
 
@@ -83,11 +83,7 @@ func findX_MAS(x int, y int, data [][]string) int {
 }
 
 func main() {
-	input, err := os.ReadFile("data.txt")
-	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
-	}
+	input := utils.ReadFile("data.txt")
 	lines := strings.Split(string(input), "\n")
 	data := make([][]string, len(lines))
 	for i := range lines {

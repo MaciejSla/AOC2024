@@ -49,11 +49,9 @@ The [concatenation](https://en.wikipedia.org/wiki/Concatenation) operator (`||`)
 
 Now, apart from the three equations that could be made true using only addition and multiplication, the above example has three more equations that can be made true by inserting operators:
 
-_The examples below are copied directly from [adventofcode.com](https://adventofcode.com/2024/day/7). They are wrong, and as of 08.12.2024 are still present on the site._
-
-- `156: 15 6` can be made true through a single concatenation: `15 || 6 = 156`. _<-- this one is correct_
-- `7290: 6 8 6 15` can be made true using `6 * 8 || 6 * 15`. _<-- this violates the "evaluated left-to-right" rule_
-- `192: 17 8 14` can be made true using `17 || 8 + 14`. _<-- this doesn't even produce 192..._
+- `156: 15 6` can be made true through a single concatenation: `15 || 6 = 156`.
+- `7290: 6 8 6 15` can be made true using `6 * 8 || 6 * 15`.
+- `192: 17 8 14` can be made true using `17 || 8 + 14`.
 
 Adding up all six test values (the three that could be made before using only `+` and `*` plus the new three that can now be made by also using `||`) produces the new **total calibration result** of **`11387`**.
 

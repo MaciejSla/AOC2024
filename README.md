@@ -8,3 +8,4 @@
 - [Day 6: Guard Gallivant](https://github.com/MaciejSla/AOC2024/tree/main/Day6) - [adventofcode.com ☍](https://adventofcode.com/2024/day/6)
 - [Day 7: Bridge Repair](https://github.com/MaciejSla/AOC2024/tree/main/Day7) - [adventofcode.com ☍](https://adventofcode.com/2024/day/7)
 - [Day 8: Resonant Collinearity](https://github.com/MaciejSla/AOC2024/tree/main/Day8) - [adventofcode.com ☍](https://adventofcode.com/2024/day/8)
+- [Day 9: Disk Fragmenter](https://github.com/MaciejSla/AOC2024/tree/main/Day9) - [adventofcode.com ☍](https://adventofcode.com/2024/day/9)

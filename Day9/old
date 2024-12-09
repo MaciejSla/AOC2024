@@ -1,0 +1,69 @@
+package main
+
+import (
+	"fmt"
+	"strconv"
+	"strings"
+	"utils"
+)
+
+func findLastFileIndex(arr []int) int {
+	for i := len(arr) - 1; i >= 0; i-- {
+		if arr[i] >= 0 {
+			return i
+		}
+	}
+	return -1
+}
+
+func printString(arr []Section) {
+	for _, section := range arr {
+		fmt.Print(strings.Repeat(section.Value, section.Size))
+	}
+	fmt.Println()
+}
+
+func convertToSlice(diskmap []Section) (result []int) {
+	for _, section := range diskmap {
+		result = append(result, section.toSlice()...)
+	}
+	return
+}
+
+type Section struct {
+	Value string
+	Size  int
+}
+
+func (section *Section) toSlice() (result []int) {
+	for range section.Size {
+		if section.Value != "." {
+			numVal, err := strconv.Atoi(section.Value)
+			utils.ThrowErr(err)
+			result = append(result, numVal)
+		} else {
+			result = append(result, -1)
+		}
+	}
+	return
+}
+
+func main() {
+	diskMap := utils.ReadFile("data.txt")
+	var mapped []Section
+	idNumber := 0
+
+	for i, char := range string(diskMap) {
+		num, err := strconv.Atoi(string(char))
+		utils.ThrowErr(err)
+
+		switch i % 2 {
+		case 0:
+			mapped = append(mapped, Section{Value: strconv.Itoa(idNumber), Size: num})
+			idNumber++
+		case 1:
+			mapped = append(mapped, Section{Value: ".", Size: num})
+		}
+	}
+	printString(mapped)
+}

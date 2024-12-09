@@ -35,19 +35,6 @@ type Section struct {
 	Size  int
 }
 
-func (section *Section) toSlice() (result []int) {
-	for range section.Size {
-		if section.Value != "." {
-			numVal, err := strconv.Atoi(section.Value)
-			utils.ThrowErr(err)
-			result = append(result, numVal)
-		} else {
-			result = append(result, -1)
-		}
-	}
-	return
-}
-
 func main() {
 	diskMap := utils.ReadFile("data.txt")
 	var mapped []Section

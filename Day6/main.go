@@ -7,11 +7,6 @@ import (
 	"utils"
 )
 
-// type Coords[T, U any] struct {
-// 	X T
-// 	Y U
-// }
-
 type Guard struct {
 	direction         string
 	startingDirection string

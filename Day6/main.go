@@ -7,23 +7,23 @@ import (
 	"utils"
 )
 
-type Coords[T, U any] struct {
-	X T
-	Y U
-}
+// type Coords[T, U any] struct {
+// 	X T
+// 	Y U
+// }
 
 type Guard struct {
 	direction         string
 	startingDirection string
-	startingPosition  Coords[int, int]
-	position          Coords[int, int]
-	visited           map[Coords[int, int]]bool
-	paradoxPath       []Coords[Coords[int, int], string]
+	startingPosition  utils.Point
+	position          utils.Point
+	visited           map[utils.Point]bool
+	paradoxPath       []utils.Pair[utils.Point, string]
 	leftMap           bool
 }
 
-func coordInBounds(coords Coords[int, int], bounds Coords[int, int]) bool {
-	return coords.X <= bounds.X && coords.X >= 0 && coords.Y <= bounds.Y && coords.Y >= 0
+func pointInBounds(point utils.Point, bounds utils.Point) bool {
+	return point.X <= bounds.X && point.X >= 0 && point.Y <= bounds.Y && point.Y >= 0
 }
 
 func turnRight(direction string) string {
@@ -45,7 +45,7 @@ func main() {
 	directions := []string{"^", ">", "<", "v"}
 	data := utils.ReadFile("data.txt")
 	pathMap := [][]string{}
-	guard := Guard{"", "", Coords[int, int]{}, Coords[int, int]{}, make(map[Coords[int, int]]bool), []Coords[Coords[int, int], string]{}, false}
+	guard := Guard{"", "", utils.Point{}, utils.Point{}, make(map[utils.Point]bool), []utils.Pair[utils.Point, string]{}, false}
 	for y, line := range strings.Split(string(data), "\r\n") {
 		cells := strings.Split(line, "")
 		if guard.direction == "" {
@@ -53,8 +53,8 @@ func main() {
 				if slices.Contains(directions, cell) {
 					guard.direction = cell
 					guard.startingDirection = cell
-					guard.startingPosition = Coords[int, int]{x, y}
-					guard.position = Coords[int, int]{x, y}
+					guard.startingPosition = utils.Point{X: x, Y: y}
+					guard.position = utils.Point{X: x, Y: y}
 					guard.visited[guard.position] = true
 					cells[x] = "."
 					break
@@ -63,7 +63,7 @@ func main() {
 		}
 		pathMap = append(pathMap, cells)
 	}
-	mapBounds := Coords[int, int]{len(pathMap[0]) - 1, len(pathMap) - 1}
+	mapBounds := utils.Point{X: len(pathMap[0]) - 1, Y: len(pathMap) - 1}
 
 	for {
 		move := guard.position
@@ -77,7 +77,7 @@ func main() {
 		case "v":
 			move.Y += 1
 		}
-		if coordInBounds(move, mapBounds) {
+		if pointInBounds(move, mapBounds) {
 			switch pathMap[move.Y][move.X] {
 			case "#":
 				guard.direction = turnRight(guard.direction)
@@ -98,7 +98,7 @@ func main() {
 	// This is probably slow but oh well
 	for position, valid := range guard.visited {
 		if valid {
-			guard.paradoxPath = []Coords[Coords[int, int], string]{}
+			guard.paradoxPath = []utils.Pair[utils.Point, string]{}
 			guard.position = guard.startingPosition
 			guard.direction = guard.startingDirection
 
@@ -124,8 +124,8 @@ func main() {
 				case "v":
 					move.Y += 1
 				}
-				if coordInBounds(move, mapBounds) {
-					coords := Coords[Coords[int, int], string]{move, guard.direction}
+				if pointInBounds(move, mapBounds) {
+					coords := utils.Pair[utils.Point, string]{First: move, Second: guard.direction}
 					if slices.Contains(guard.paradoxPath, coords) {
 						paradoxCount++
 						break
@@ -134,7 +134,7 @@ func main() {
 					case "#":
 						guard.direction = turnRight(guard.direction)
 					case ".":
-						guard.paradoxPath = append(guard.paradoxPath, Coords[Coords[int, int], string]{move, guard.direction})
+						guard.paradoxPath = append(guard.paradoxPath, utils.Pair[utils.Point, string]{First: move, Second: guard.direction})
 						guard.position = move
 					}
 				} else {

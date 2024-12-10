@@ -19,8 +19,16 @@ func (c *Point) Subtract(c2 Point) Point {
 	return Point{c.X - c2.X, c.Y - c2.Y}
 }
 
+func (c *Point) SubtractRaw(x, y int) Point {
+	return Point{c.X - x, c.Y - y}
+}
+
 func (c *Point) Add(c2 Point) Point {
 	return Point{c.X + c2.X, c.Y + c2.Y}
+}
+
+func (c *Point) AddRaw(x, y int) Point {
+	return Point{c.X + x, c.Y + y}
 }
 
 func (c *Point) InBounds(bounds Point) bool {

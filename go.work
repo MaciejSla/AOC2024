@@ -3,6 +3,7 @@ go 1.23.4
 use (
 	./Day10
 	./Day11
+	./Day12
 	./Day4
 	./Day5
 	./Day6
